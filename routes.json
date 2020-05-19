@@ -1,0 +1,8 @@
+{
+  "routes": [
+    {
+      "route": "/mirror",
+      "address": "http://localhost:8080"
+    }
+  ]
+}

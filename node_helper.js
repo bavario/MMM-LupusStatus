@@ -1,47 +1,39 @@
 /* Magic Mirror
- * Node Helper: {{MODULE_NAME}}
+ * Node Helper: MMM-LupusStatus
  *
- * By {{AUTHOR_NAME}}
- * {{LICENSE}} Licensed.
+ * By Mario Obendorfer
  */
 
 var NodeHelper = require("node_helper");
 
 module.exports = NodeHelper.create({
 
-	// Override socketNotificationReceived method.
-
-	/* socketNotificationReceived(notification, payload)
-	 * This method is called when a socket notification arrives.
-	 *
-	 * argument notification string - The identifier of the noitication.
-	 * argument payload mixed - The payload of the notification.
+	/**
+	 * generate API für Lupusec Action URL's to be called for home automation
 	 */
-	socketNotificationReceived: function(notification, payload) {
-		if (notification === "{{MODULE_NAME}}-NOTIFICATION_TEST") {
-			console.log("Working notification system. Notification:", notification, "payload: ", payload);
-			// Send notification
-			this.sendNotificationTest(this.anotherFunction()); //Is possible send objects :)
-		}
-	},
-
-	// Example function send notification test
-	sendNotificationTest: function(payload) {
-		this.sendSocketNotification("{{MODULE_NAME}}-NOTIFICATION_TEST", payload);
-	},
-
-	// this you can create extra routes for your module
-	extraRoutes: function() {
+	start: function() {
 		var self = this;
-		this.expressApp.get("/{{MODULE_NAME}}/extra_route", function(req, res) {
-			// call another function
-			values = self.anotherFunction();
-			res.send(values);
+		this.expressApp.get("/lupus/security/armed", function(req, res) {
+			self.sendSocketNotification("LUPUS_ARMED", {});
+			res.send({'success': 'armed'});
+		});
+
+		this.expressApp.get("/lupus/security/disarmed", function(req, res) {
+			self.sendSocketNotification("LUPUS_DISARMED", {});
+			res.send({'success': 'disarmed'});
+		});
+
+		this.expressApp.get("/lupus/window/opened", function(req, res) {
+			self.sendSocketNotification("LUPUS_WINDOW_OPENED", {});
+			res.send({'success': 'opened'});
+		});
+
+		this.expressApp.get("/lupus/window/closed", function(req, res) {
+			self.sendSocketNotification("LUPUS_WINDOW_CLOSED", {});
+			res.send({'success': 'closed'});
 		});
 	},
 
-	// Test another function
-	anotherFunction: function() {
-		return {date: new Date()};
-	}
+	// empty func
+	socketNotificationReceived: function() {},
 });

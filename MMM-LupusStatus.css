@@ -1,0 +1,56 @@
+/*
+ *
+ * MMM-LupusStatus
+ *
+ * By Mario Obendorfer
+ *
+ */
+
+.lupus-container {
+	height: 108px;
+	width: 250px;
+	padding: 15px;
+	border: 1px solid #fff;
+	border-radius: 5px;
+	background-color: #000;
+}
+
+.lupus-windows {
+	width: 120px;
+	height: 115px;
+	float: left;
+
+	-webkit-mask: url("icons/window.svg") no-repeat 100% 100%;
+  	mask: url("icons/window.svg") no-repeat 100% 100%;
+  	-webkit-mask-size: cover;
+  	mask-size: cover;
+  	background-color: #ddd;
+}
+
+.lupus-windows.closed {
+	background-color: green;
+}
+
+.lupus-windows.opened {
+	background-color: red;
+}
+
+.lupus-security {
+	width: 100px;
+	height: 100px;
+	float: right;
+
+	-webkit-mask: url("icons/security.svg") no-repeat 100% 100%;
+  	mask: url("icosn/security.svg") no-repeat 100% 100%;
+  	-webkit-mask-size: cover;
+  	mask-size: cover;
+  	background-color: #ddd;
+}
+
+.lupus-security.disarmed {
+	background-color: green;
+}
+
+.lupus-security.armed {
+	background-color: red;
+}
